@@ -1,0 +1,796 @@
+<title>Terraform Associate 004 — Study Set</title>
+<style>
+  :root {
+    --paper: #eef2f7;
+    --paper-raised: #ffffff;
+    --ink: #16283f;
+    --ink-soft: #2c435f;
+    --muted2: #6b7e94;
+    --line: #c4d2e0;
+    --line-strong: #3a78b5;
+    --accent: #d9642c;
+    --accent-ink: #ffffff;
+    --ok: #3f8f5f;
+    --ok-bg: #e4f2e9;
+    --grid-line: rgba(58, 120, 181, 0.10);
+    --shadow: 0 1px 2px rgba(22, 40, 63, 0.06);
+    --radius: 3px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #0d1b2e;
+      --paper-raised: #12233b;
+      --ink: #e7eef5;
+      --ink-soft: #c3d2e1;
+      --muted2: #93a7bd;
+      --line: #2a4463;
+      --line-strong: #5fa0d6;
+      --accent: #e8794a;
+      --accent-ink: #1a1005;
+      --ok: #63b784;
+      --ok-bg: rgba(99, 183, 132, 0.14);
+      --grid-line: rgba(95, 160, 214, 0.10);
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #0d1b2e;
+    --paper-raised: #12233b;
+    --ink: #e7eef5;
+    --ink-soft: #c3d2e1;
+    --muted2: #93a7bd;
+    --line: #2a4463;
+    --line-strong: #5fa0d6;
+    --accent: #e8794a;
+    --accent-ink: #1a1005;
+    --ok: #63b784;
+    --ok-bg: rgba(99, 183, 132, 0.14);
+    --grid-line: rgba(95, 160, 214, 0.10);
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  :root[data-theme="light"] {
+    --paper: #eef2f7;
+    --paper-raised: #ffffff;
+    --ink: #16283f;
+    --ink-soft: #2c435f;
+    --muted2: #6b7e94;
+    --line: #c4d2e0;
+    --line-strong: #3a78b5;
+    --accent: #d9642c;
+    --accent-ink: #ffffff;
+    --ok: #3f8f5f;
+    --ok-bg: #e4f2e9;
+    --grid-line: rgba(58, 120, 181, 0.10);
+    --shadow: 0 1px 2px rgba(22, 40, 63, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background:
+      linear-gradient(var(--grid-line) 1px, transparent 1px) 0 0 / 28px 28px,
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px) 0 0 / 28px 28px,
+      var(--paper);
+    color: var(--ink);
+    font-family: Charter, "Iowan Old Style", "Palatino Linotype", Georgia, "Times New Roman", serif;
+    line-height: 1.55;
+    padding: 40px 20px 120px;
+  }
+
+  .sheet {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .mono {
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", "JetBrains Mono", Menlo, Consolas, monospace;
+  }
+
+  .eyebrow {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted2);
+  }
+
+  /* ---- Title block ---- */
+  .titleblock {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--paper-raised);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    margin-bottom: 36px;
+  }
+  .titleblock-main {
+    padding: 22px 24px 18px;
+    border-bottom: 1px solid var(--line);
+  }
+  .titleblock-main h1 {
+    margin: 6px 0 4px;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  .titleblock-main p {
+    margin: 0;
+    color: var(--ink-soft);
+    max-width: 62ch;
+  }
+  .titleblock-fields {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .field {
+    padding: 10px 16px;
+    border-right: 1px solid var(--line);
+  }
+  .field:last-child { border-right: none; }
+  .field .eyebrow { display: block; margin-bottom: 3px; }
+  .field .val {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 14px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---- Progress ruler ---- */
+  .progress-wrap {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background: var(--paper);
+    padding: 10px 0 14px;
+    margin: -10px 0 28px;
+  }
+  .progress-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 6px;
+  }
+  .progress-row .eyebrow { color: var(--ink-soft); }
+  #progress-count {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    color: var(--muted2);
+    font-variant-numeric: tabular-nums;
+  }
+  .ruler {
+    position: relative;
+    height: 14px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: var(--paper-raised);
+    overflow: hidden;
+  }
+  .ruler::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      90deg, var(--line) 0, var(--line) 1px, transparent 1px, transparent 5%
+    );
+    opacity: 0.6;
+  }
+  .ruler-fill {
+    position: absolute;
+    inset: 0;
+    width: 0%;
+    background: var(--accent);
+    transition: width 0.5s ease;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ruler-fill { transition: none; }
+  }
+
+  /* ---- Sheet (week) sections ---- */
+  .week {
+    margin-bottom: 44px;
+  }
+  .week-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+  .week-head .num {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    color: var(--line-strong);
+    letter-spacing: 0.08em;
+  }
+  .week-head h2 {
+    margin: 0;
+    font-size: 19px;
+    font-weight: 600;
+  }
+  .week-sub {
+    margin: 0 0 18px;
+    color: var(--muted2);
+    font-size: 14.5px;
+    max-width: 62ch;
+  }
+
+  /* ---- Day rows, graph-connector layout ---- */
+  .days {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+  }
+  .node-col {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+  .node-col::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    background: var(--line);
+  }
+  .day:first-child .node-col::before { top: 18px; }
+  .day:last-child .node-col::before { bottom: calc(100% - 18px); }
+  .node-dot {
+    position: relative;
+    z-index: 1;
+    margin-top: 14px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--paper-raised);
+    border: 2px solid var(--line-strong);
+  }
+  .day.complete .node-dot {
+    background: var(--ok);
+    border-color: var(--ok);
+  }
+
+  .day {
+    display: contents;
+  }
+  .day-card {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 16px 18px 14px;
+    margin: 0 0 14px;
+  }
+  .day-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+  }
+  .day-num {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    color: var(--muted2);
+    letter-spacing: 0.06em;
+  }
+  .day-card h3 {
+    margin: 0;
+    font-size: 16.5px;
+    font-weight: 600;
+    flex: 1 1 auto;
+  }
+  .chip {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.04em;
+    padding: 2px 7px;
+    border-radius: 20px;
+    border: 1px solid var(--line);
+    color: var(--muted2);
+    white-space: nowrap;
+  }
+  .chip.cloud {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+  .day.complete .chip.status {
+    background: var(--ok-bg);
+    color: var(--ok);
+    border-color: transparent;
+  }
+
+  .tasks {
+    list-style: none;
+    margin: 10px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .tasks li {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    font-size: 14.5px;
+  }
+  .tasks input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    margin-top: 3px;
+    flex-shrink: 0;
+    border: 1.5px solid var(--line-strong);
+    border-radius: 3px;
+    background: var(--paper-raised);
+    cursor: pointer;
+    position: relative;
+  }
+  .tasks input[type="checkbox"]:checked {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .tasks input[type="checkbox"]:checked::after {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 1px;
+    width: 5px;
+    height: 9px;
+    border: solid var(--accent-ink);
+    border-width: 0 2px 2px 0;
+    transform: rotate(40deg);
+  }
+  .tasks input[type="checkbox"]:focus-visible {
+    outline: 2px solid var(--line-strong);
+    outline-offset: 2px;
+  }
+  .tasks label {
+    cursor: pointer;
+  }
+  .tasks .tag {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    color: var(--muted2);
+    margin-right: 4px;
+  }
+  .tasks li.checked label { color: var(--muted2); text-decoration: line-through; text-decoration-color: var(--line); }
+
+  code.inline {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.88em;
+    background: var(--grid-line);
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+
+  footer {
+    max-width: 860px;
+    margin: 40px auto 0;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    color: var(--muted2);
+    font-size: 12.5px;
+  }
+  footer a { color: var(--line-strong); }
+
+  @media (max-width: 560px) {
+    .titleblock-fields { grid-template-columns: repeat(2, 1fr); }
+    .field:nth-child(2) { border-right: none; }
+    .days { grid-template-columns: 26px 1fr; }
+  }
+</style>
+
+<div class="sheet">
+
+  <div class="titleblock">
+    <div class="titleblock-main">
+      <span class="eyebrow">Study set / hands-on lab plan</span>
+      <h1>HashiCorp Certified: Terraform Associate (004)</h1>
+      <p>Seventeen working days across three sheets. Local &amp; Docker first, real Azure resources introduced once the core workflow is automatic, HCP Terraform last. Every day ships a real commit.</p>
+    </div>
+    <div class="titleblock-fields">
+      <div class="field">
+        <span class="eyebrow">Exam targets</span>
+        <span class="val">Terraform 1.12</span>
+      </div>
+      <div class="field">
+        <span class="eyebrow">Scope</span>
+        <span class="val">8 objectives</span>
+      </div>
+      <div class="field">
+        <span class="eyebrow">Pace</span>
+        <span class="val">17 days / 3 sheets</span>
+      </div>
+      <div class="field">
+        <span class="eyebrow">Repo</span>
+        <span class="val"><a href="https://github.com/Georgi-Petkov/terraform-associate-prep" style="color:inherit">terraform-associate-prep</a></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-row">
+      <span class="eyebrow">Overall progress</span>
+      <span id="progress-count" class="mono">0 / 0 tasks</span>
+    </div>
+    <div class="ruler" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="ruler">
+      <div class="ruler-fill" id="ruler-fill"></div>
+    </div>
+  </div>
+
+  <!-- ============ WEEK 1 ============ -->
+  <section class="week" data-week="1">
+    <div class="week-head">
+      <span class="num">SHEET 01</span>
+      <h2>Local &amp; Docker — the core loop</h2>
+    </div>
+    <p class="week-sub">Zero cloud cost. Everything here is the same mechanics you'll later point at Azure: init → plan → apply → destroy, state, variables, dependencies.</p>
+
+    <div class="days">
+
+      <div class="day" data-day="1">
+        <div class="node-col"><div class="node-dot"></div></div>
+        <div class="day-card">
+          <div class="day-top">
+            <span class="day-num">DAY 01</span>
+            <h3>IaC concepts &amp; the core workflow</h3>
+            <span class="chip">obj 1a–1c, 2a, 3a–3g</span>
+          </div>
+          <ul class="tasks">
+            <li><input type="checkbox" id="d1-1"><label for="d1-1"><span class="tag">read</span>IaC intro &amp; Terraform use-cases docs</label></li>
+            <li><input type="checkbox" id="d1-2"><label for="d1-2"><span class="tag">lab</span><code class="inline">week1-local-docker</code>: run <code class="inline">init → fmt → validate → plan → apply</code></label></li>
+            <li><input type="checkbox" id="d1-3"><label for="d1-3"><span class="tag">lab</span>run <code class="inline">terraform destroy</code>, confirm state is empty</label></li>
+            <li><input type="checkbox" id="d1-4"><label for="d1-4"><span class="tag">ship</span>commit &amp; push</label></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day" data-day="2">
+        <div class="node-col"><div class="node-dot"></div></div>
+        <div class="day-card">
+          <div class="day-top">
+            <span class="day-num">DAY 02</span>
+            <h3>Providers, versioning &amp; the dependency graph</h3>
+            <span class="chip">obj 2b–2d, 4a–4b, 4f</span>
+          </div>
+          <ul class="tasks">
+            <li><input type="checkbox" id="d2-1"><label for="d2-1"><span class="tag">read</span>providers overview, provider requirements, dependency lock file</label></li>
+            <li><input type="checkbox" id="d2-2"><label for="d2-2"><span class="tag">lab</span>add a resource referencing another implicitly, then one using explicit <code class="inline">depends_on</code></label></li>
+            <li><input type="checkbox" id="d2-3"><label for="d2-3"><span class="tag">lab</span><code class="inline">terraform graph</code> → render the <code class="inline">.dot</code> output, identify the edges</label></li>
+            <li><input type="checkbox" id="d2-4"><label for="d2-4"><span class="tag">ship</span>commit &amp; push</label></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day" data-day="3">
+        <div class="node-col"><div class="node-dot"></div></div>
+        <div class="day-card">
+          <div class="day-top">
+            <span class="day-num">DAY 03</span>
+            <h3>Variables, outputs &amp; complex types</h3>
+            <span class="chip">obj 4c–4d</span>
+          </div>
+          <ul class="tasks">
+            <li><input type="checkbox" id="d3-1"><label for="d3-1"><span class="tag">read</span>input variables, output values, type constraints</label></li>
+            <li><input type="checkbox" id="d3-2"><label for="d3-2"><span class="tag">lab</span>add an <code class="inline">object</code>/<code class="inline">list(map)</code> variable, loop it with <code class="inline">for_each</code></label></li>
+            <li><input type="checkbox" id="d3-3"><label for="d3-3"><span class="tag">ship</span>commit &amp; push</label></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day" data-day="4">
+        <div class="node-col"><div class="node-dot"></div></div>
+        <div class="day-card">
+          <div class="day-top">
+            <span class="day-num">DAY 04</span>
+            <h3>Functions, expressions &amp; custom validation</h3>
+            <span class="chip">obj 4e, 4g</span>
+          </div>
+          <ul class="tasks">
+            <li><input type="checkbox" id="d4-1"><label for="d4-1"><span class="tag">read</span>built-in functions, dynamic expressions, custom conditions</label></li>
+            <li><input type="checkbox" id="d4-2"><label for="d4-2"><span class="tag">lab</span>add a <code class="inline">validation</code> block and a <code class="inline">precondition</code>/<code class="inline">postcondition</code></label></li>
+            <li><input type="checkbox" id="d4-3"><label for="d4-3"><span class="tag">lab</span>break one on purpose — read the exact error Terraform gives</label></li>
+            <li><input type="checkbox" id="d4-4"><label for="d4-4"><span class="tag">ship</span>commit &amp; push</label></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day" data-day="5">
+        <div class="node-col"><div class="node-dot"></div></div>
+        <div class="day-card">
+          <div class="day-top">
+            <span class="day-num">DAY 05</span>
+            <h3>Resource lifecycle &amp; sensitive data</h3>
+            <span class="chip">obj 4f, 4h</span>
+          </div>
+          <ul class="tasks">
+            <li><input type="checkbox" id="d5-1"><label for="d5-1"><span class="tag">read</span><code class="inline">lifecycle</code> meta-argument, managing sensitive data</label></li>
+            <li><input type="checkbox" id="d5-2"><label for="d5-2"><span class="tag">lab</span>add <code class="inline">create_before_destroy</code> and <code class="inline">ignore_changes</code> to a resource</label></li>
+            <li><input type="checkbox" id="d5-3"><label for="d5-3"><span class="tag">lab</span>mark a variable <code class="inline">sensitive = true</code>, confirm it's redacted in <code class="inline">plan</code></label></li>
+            <li><input type="checkbox" id="d5-4"><label for="d5-4"><span class="tag">ship</span>commit &amp; push</label></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day" data-day="6">
+        <div class="node-col"><div class="node-dot"></div></div>
+        <div class="day-card">
+          <div class="day-top">
+            <span class="day-num">DAY 06</span>
+            <h3>State fundamentals &amp; drift</h3>
+            <span class="chip">obj 6a, 6b, 6d</span>
+          </div>
+          <ul class="tasks">
+            <li><input type="checkbox" id="d6-1"><label for="d6-1"><span class="tag">read</span>Terraform state, state locking, refresh-only mode</label></li>
+            <li><input type="checkbox" id="d6-2"><label for="d6-2"><span class="tag">lab</span>delete a resource manually outside Terraform, run <code class="inline">plan</code>, explain the diff</label></li>
+            <li><input type="checkbox" id="d6-3"><label for="d6-3"><span class="tag">lab</span>try <code class="inline">terraform apply -refresh-only</code></label></li>
+            <li><input type="checkbox" id="d6-4"><label for="d6-4"><span class="tag">ship</span>commit &amp; push</label></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ WEEK 2 ============ -->
+  <section class="week" data-week="2">
+    <div class="week-head">
+      <span class="num">SHEET 02</span>
+      <h2>Modules, state operations &amp; Azure</h2>
+    </div>
+    <p class="week-sub">Same mechanics, reused. Azure appears exactly once, on Day 12, scoped to resource-group + storage-account, with a budget alert set before the first apply.</p>
+
+    <div class="days">
+
+      <div class="day" data-day="7">
+        <div class="node-col"><div class="node-dot"></div></div>
+        <div class="day-card">
+          <div class="day-top">
+            <span class="day-num">DAY 07</span>
+            <h3>Author a reusable module</h3>
+            <span class="chip">obj 5a, 5c, 5e</span>
+          </div>
+          <ul class="tasks">
+            <li><input type="checkbox" id="d7-1"><label for="d7-1"><span class="tag">read</span>modules overview, standard module structure</label></li>
+            <li><input type="checkbox" id="d7-2"><label for="d7-2"><span class="tag">lab</span>wrap the nginx lab into <code class="inline">modules/nginx-site</code>, call it twice with different variables</label></li>
+            <li><input type="checkbox" id="d7-3"><label for="d7-3"><span class="tag">ship</span>commit &amp; push</label></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day" data-day="8">
+        <div class="node-col"><div class="node-dot"></div></div>
+        <div class="day-card">
+          <div class="day-top">
+            <span class="day-num">DAY 08</span>
+            <h3>Module versioning &amp; registry modules</h3>
+            <span class="chip">obj 5b, 5d</span>
+          </div>
+          <ul class="tasks">
+            <li><input type="checkbox" id="d8-1"><label for="d8-1"><span class="tag">read</span>using registry modules, managing module versions, composing modules</label></li>
+            <li><input type="checkbox" id="d8-2"><label for="d8-2"><span class="tag">lab</span>source one public registry module, pin its version, run <code class="inline">plan</code> only</label></li>
+            <li><input type="checkbox" id="d8-3"><label for="d8-3"><span class="tag">ship</span>commit &amp; push</label></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day" data-day="9">
+        <div class="node-col"><div class="node-dot"></div></div>
+        <div class="day-card">
+          <div class="day-top">
+            <span class="day-num">DAY 09</span>
+            <h3>State surgery: move, import, remove</h3>
+            <span class="chip">obj 6f–6h, 7a</span>
+          </div>
+          <ul class="tasks">
+            <li><input type="checkbox" id="d9-1"><label for="d9-1"><span class="tag">read</span><code class="inline">moved</code> block, refactoring state, importing existing resources</label></li>
+            <li><input type="checkbox" id="d9-2"><label for="d9-2"><span class="tag">lab</span>rename a resource in config, reconcile with a <code class="inline">moved</code> block instead of destroy/recreate</label></li>
+            <li><input type="checkbox" id="d9-3"><label for="d9-3"><span class="tag">lab</span><code class="inline">docker run</code> a container by hand, then <code class="inline">terraform import</code> it</label></li>
+            <li><input type="checkbox" id="d9-4"><label for="d9-4"><span class="tag">ship</span>commit &amp; push</label></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day" data-day="10">
+        <div class="node-col"><div class="node-dot"></div></div>
+        <div class="day-card">
+          <div class="day-top">
+            <span class="day-num">DAY 10</span>
+            <h3>Inspecting &amp; troubleshooting</h3>
+            <span class="chip">obj 7b, 7c</span>
+          </div>
+          <ul class="tasks">
+            <li><input type="checkbox" id="d10-1"><label for="d10-1"><span class="tag">read</span><code class="inline">terraform state list/show</code>, enabling logs, troubleshooting</label></li>
+            <li><input type="checkbox" id="d10-2"><label for="d10-2"><span class="tag">lab</span>run one <code class="inline">apply</code> with <code class="inline">TF_LOG=DEBUG</code>, find the provider's raw API call in the log</label></li>
+            <li><input type="checkbox" id="d10-3"><label for="d10-3"><span class="tag">ship</span>commit &amp; push</label></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day" data-day="11">
+        <div class="node-col"><div class="node-dot"></div></div>
+        <div class="day-card">
+          <div class="day-top">
+            <span class="day-num">DAY 11</span>
+            <h3>Remote backend basics</h3>
+            <span class="chip">obj 6c</span>
+          </div>
+          <ul class="tasks">
+            <li><input type="checkbox" id="d11-1"><label for="d11-1"><span class="tag">read</span><code class="inline">backend</code> block configuration, state storage &amp; locking</label></li>
+            <li><input type="checkbox" id="d11-2"><label for="d11-2"><span class="tag">lab</span>change the backend config path, observe the re-init prompt and state migration</label></li>
+            <li><input type="checkbox" id="d11-3"><label for="d11-3"><span class="tag">ship</span>commit &amp; push</label></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day" data-day="12">
+        <div class="node-col"><div class="node-dot"></div></div>
+        <div class="day-card">
+          <div class="day-top">
+            <span class="day-num">DAY 12</span>
+            <h3>Provision Azure resources</h3>
+            <span class="chip cloud">azure — needs sign-off</span>
+          </div>
+          <ul class="tasks">
+            <li><input type="checkbox" id="d12-1"><label for="d12-1"><span class="tag">guard</span>set an Azure budget alert before touching <code class="inline">terraform apply</code></label></li>
+            <li><input type="checkbox" id="d12-2"><label for="d12-2"><span class="tag">lab</span><code class="inline">azurerm_resource_group</code> + <code class="inline">azurerm_storage_account</code> only, tagged <code class="inline">learning=true</code></label></li>
+            <li><input type="checkbox" id="d12-3"><label for="d12-3"><span class="tag">lab</span><code class="inline">apply</code>, confirm in the Azure portal, then <code class="inline">destroy</code> before ending the session</label></li>
+            <li><input type="checkbox" id="d12-4"><label for="d12-4"><span class="tag">ship</span>commit &amp; push</label></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ WEEK 3 ============ -->
+  <section class="week" data-week="3">
+    <div class="week-head">
+      <span class="num">SHEET 03</span>
+      <h2>HCP Terraform &amp; exam readiness</h2>
+    </div>
+    <p class="week-sub">Your HCP Terraform org is already connected to GitHub — this sheet puts it to work, then closes with a timed mock exam.</p>
+
+    <div class="days">
+
+      <div class="day" data-day="13">
+        <div class="node-col"><div class="node-dot"></div></div>
+        <div class="day-card">
+          <div class="day-top">
+            <span class="day-num">DAY 13</span>
+            <h3>HCP Terraform fundamentals</h3>
+            <span class="chip">obj 8a, 8b</span>
+          </div>
+          <ul class="tasks">
+            <li><input type="checkbox" id="d13-1"><label for="d13-1"><span class="tag">read</span>what is HCP Terraform, remote operations</label></li>
+            <li><input type="checkbox" id="d13-2"><label for="d13-2"><span class="tag">lab</span><code class="inline">terraform login</code>, migrate the week-1 lab's state into an HCP Terraform workspace</label></li>
+            <li><input type="checkbox" id="d13-3"><label for="d13-3"><span class="tag">ship</span>commit &amp; push</label></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day" data-day="14">
+        <div class="node-col"><div class="node-dot"></div></div>
+        <div class="day-card">
+          <div class="day-top">
+            <span class="day-num">DAY 14</span>
+            <h3>Workspaces, projects &amp; VCS-driven runs</h3>
+            <span class="chip">obj 8c</span>
+          </div>
+          <ul class="tasks">
+            <li><input type="checkbox" id="d14-1"><label for="d14-1"><span class="tag">read</span>HCP Terraform workspaces, organizing workspaces with projects</label></li>
+            <li><input type="checkbox" id="d14-2"><label for="d14-2"><span class="tag">lab</span>push to the connected GitHub repo, watch HCP Terraform auto-trigger a plan</label></li>
+            <li><input type="checkbox" id="d14-3"><label for="d14-3"><span class="tag">ship</span>this push is the commit</label></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day" data-day="15">
+        <div class="node-col"><div class="node-dot"></div></div>
+        <div class="day-card">
+          <div class="day-top">
+            <span class="day-num">DAY 15</span>
+            <h3>Variable sets, teams &amp; governance tour</h3>
+            <span class="chip">obj 8b, 8d</span>
+          </div>
+          <ul class="tasks">
+            <li><input type="checkbox" id="d15-1"><label for="d15-1"><span class="tag">read</span>variable sets, teams overview, permissions overview</label></li>
+            <li><input type="checkbox" id="d15-2"><label for="d15-2"><span class="tag">lab</span>create one variable set and apply it to your workspace</label></li>
+            <li><input type="checkbox" id="d15-3"><label for="d15-3"><span class="tag">ship</span>commit &amp; push</label></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day" data-day="16">
+        <div class="node-col"><div class="node-dot"></div></div>
+        <div class="day-card">
+          <div class="day-top">
+            <span class="day-num">DAY 16</span>
+            <h3>Dynamic credentials, drift &amp; policy overview</h3>
+            <span class="chip">obj 8d</span>
+          </div>
+          <ul class="tasks">
+            <li><input type="checkbox" id="d16-1"><label for="d16-1"><span class="tag">read</span>dynamic provider credentials, detecting drift &amp; enforcing policies</label></li>
+            <li><input type="checkbox" id="d16-2"><label for="d16-2"><span class="tag">lab</span>enable health assessments on the workspace, trigger a manual drift check</label></li>
+            <li><input type="checkbox" id="d16-3"><label for="d16-3"><span class="tag">ship</span>commit &amp; push</label></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day" data-day="17">
+        <div class="node-col"><div class="node-dot"></div></div>
+        <div class="day-card">
+          <div class="day-top">
+            <span class="day-num">DAY 17</span>
+            <h3>Full review &amp; timed mock exam</h3>
+            <span class="chip">all objectives</span>
+          </div>
+          <ul class="tasks">
+            <li><input type="checkbox" id="d17-1"><label for="d17-1"><span class="tag">review</span>redo any lab that felt shaky</label></li>
+            <li><input type="checkbox" id="d17-2"><label for="d17-2"><span class="tag">exam</span>official HashiCorp sample questions, 60-minute timed mock</label></li>
+            <li><input type="checkbox" id="d17-3"><label for="d17-3"><span class="tag">ship</span>final commit — tag the repo <code class="inline">v1-exam-ready</code></label></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    Sources: <a href="https://developer.hashicorp.com/terraform/tutorials/certification-004/associate-review-004" target="_blank" rel="noopener">official 004 exam objectives</a> &middot; <a href="https://developer.hashicorp.com/terraform/tutorials/certification-004/associate-study-004" target="_blank" rel="noopener">official 004 learning path</a>. Checkbox state saves to this browser only.
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  var checkboxes = Array.prototype.slice.call(document.querySelectorAll('.tasks input[type="checkbox"]'));
+  var STORAGE_KEY = 'tf004-plan-v1';
+
+  function load() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+    catch (e) { return {}; }
+  }
+  function save(state) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+    catch (e) {}
+  }
+
+  var state = load();
+
+  checkboxes.forEach(function (cb) {
+    if (state[cb.id]) cb.checked = true;
+    cb.addEventListener('change', function () {
+      state[cb.id] = cb.checked;
+      save(state);
+      refresh();
+    });
+  });
+
+  function refresh() {
+    var total = checkboxes.length;
+    var done = checkboxes.filter(function (cb) { return cb.checked; }).length;
+    var pct = total ? Math.round((done / total) * 100) : 0;
+
+    document.getElementById('progress-count').textContent = done + ' / ' + total + ' tasks — ' + pct + '%';
+    var fill = document.getElementById('ruler-fill');
+    fill.style.width = pct + '%';
+    document.getElementById('ruler').setAttribute('aria-valuenow', pct);
+
+    document.querySelectorAll('.day').forEach(function (day) {
+      var boxes = Array.prototype.slice.call(day.querySelectorAll('input[type="checkbox"]'));
+      var allDone = boxes.length > 0 && boxes.every(function (b) { return b.checked; });
+      day.classList.toggle('complete', allDone);
+      boxes.forEach(function (b) {
+        var li = b.closest('li');
+        if (li) li.classList.toggle('checked', b.checked);
+      });
+    });
+  }
+
+  refresh();
+})();
+</script>
