@@ -1,4 +1,5 @@
-<title>Terraform Associate 004 — Study Set</title>
+<meta charset="utf-8">
+<title>Terraform Associate 004 &mdash; Study Set</title>
 <style>
   :root {
     --paper: #eef2f7;
@@ -425,9 +426,9 @@
   <section class="week" data-week="1">
     <div class="week-head">
       <span class="num">SHEET 01</span>
-      <h2>Local &amp; Docker — the core loop</h2>
+      <h2>Local &amp; Docker &mdash; the core loop</h2>
     </div>
-    <p class="week-sub">Zero cloud cost. Everything here is the same mechanics you'll later point at Azure: init → plan → apply → destroy, state, variables, dependencies.</p>
+    <p class="week-sub">Zero cloud cost. Everything here is the same mechanics you'll later point at Azure: init &rarr; plan &rarr; apply &rarr; destroy, state, variables, dependencies.</p>
 
     <div class="days">
 
@@ -437,11 +438,11 @@
           <div class="day-top">
             <span class="day-num">DAY 01</span>
             <h3>IaC concepts &amp; the core workflow</h3>
-            <span class="chip">obj 1a–1c, 2a, 3a–3g</span>
+            <span class="chip">obj 1a&ndash;1c, 2a, 3a&ndash;3g</span>
           </div>
           <ul class="tasks">
             <li><input type="checkbox" id="d1-1"><label for="d1-1"><span class="tag">read</span>IaC intro &amp; Terraform use-cases docs</label></li>
-            <li><input type="checkbox" id="d1-2"><label for="d1-2"><span class="tag">lab</span><code class="inline">week1-local-docker</code>: run <code class="inline">init → fmt → validate → plan → apply</code></label></li>
+            <li><input type="checkbox" id="d1-2"><label for="d1-2"><span class="tag">lab</span><code class="inline">week1-local-docker</code>: run <code class="inline">init &rarr; fmt &rarr; validate &rarr; plan &rarr; apply</code></label></li>
             <li><input type="checkbox" id="d1-3"><label for="d1-3"><span class="tag">lab</span>run <code class="inline">terraform destroy</code>, confirm state is empty</label></li>
             <li><input type="checkbox" id="d1-4"><label for="d1-4"><span class="tag">ship</span>commit &amp; push</label></li>
           </ul>
@@ -454,12 +455,12 @@
           <div class="day-top">
             <span class="day-num">DAY 02</span>
             <h3>Providers, versioning &amp; the dependency graph</h3>
-            <span class="chip">obj 2b–2d, 4a–4b, 4f</span>
+            <span class="chip">obj 2b&ndash;2d, 4a&ndash;4b, 4f</span>
           </div>
           <ul class="tasks">
             <li><input type="checkbox" id="d2-1"><label for="d2-1"><span class="tag">read</span>providers overview, provider requirements, dependency lock file</label></li>
             <li><input type="checkbox" id="d2-2"><label for="d2-2"><span class="tag">lab</span>add a resource referencing another implicitly, then one using explicit <code class="inline">depends_on</code></label></li>
-            <li><input type="checkbox" id="d2-3"><label for="d2-3"><span class="tag">lab</span><code class="inline">terraform graph</code> → render the <code class="inline">.dot</code> output, identify the edges</label></li>
+            <li><input type="checkbox" id="d2-3"><label for="d2-3"><span class="tag">lab</span><code class="inline">terraform graph</code> &rarr; render the <code class="inline">.dot</code> output, identify the edges</label></li>
             <li><input type="checkbox" id="d2-4"><label for="d2-4"><span class="tag">ship</span>commit &amp; push</label></li>
           </ul>
         </div>
@@ -471,7 +472,7 @@
           <div class="day-top">
             <span class="day-num">DAY 03</span>
             <h3>Variables, outputs &amp; complex types</h3>
-            <span class="chip">obj 4c–4d</span>
+            <span class="chip">obj 4c&ndash;4d</span>
           </div>
           <ul class="tasks">
             <li><input type="checkbox" id="d3-1"><label for="d3-1"><span class="tag">read</span>input variables, output values, type constraints</label></li>
@@ -492,7 +493,7 @@
           <ul class="tasks">
             <li><input type="checkbox" id="d4-1"><label for="d4-1"><span class="tag">read</span>built-in functions, dynamic expressions, custom conditions</label></li>
             <li><input type="checkbox" id="d4-2"><label for="d4-2"><span class="tag">lab</span>add a <code class="inline">validation</code> block and a <code class="inline">precondition</code>/<code class="inline">postcondition</code></label></li>
-            <li><input type="checkbox" id="d4-3"><label for="d4-3"><span class="tag">lab</span>break one on purpose — read the exact error Terraform gives</label></li>
+            <li><input type="checkbox" id="d4-3"><label for="d4-3"><span class="tag">lab</span>break one on purpose &mdash; read the exact error Terraform gives</label></li>
             <li><input type="checkbox" id="d4-4"><label for="d4-4"><span class="tag">ship</span>commit &amp; push</label></li>
           </ul>
         </div>
@@ -583,7 +584,7 @@
           <div class="day-top">
             <span class="day-num">DAY 09</span>
             <h3>State surgery: move, import, remove</h3>
-            <span class="chip">obj 6f–6h, 7a</span>
+            <span class="chip">obj 6f&ndash;6h, 7a</span>
           </div>
           <ul class="tasks">
             <li><input type="checkbox" id="d9-1"><label for="d9-1"><span class="tag">read</span><code class="inline">moved</code> block, refactoring state, importing existing resources</label></li>
@@ -632,7 +633,7 @@
           <div class="day-top">
             <span class="day-num">DAY 12</span>
             <h3>Provision Azure resources</h3>
-            <span class="chip cloud">azure — needs sign-off</span>
+            <span class="chip cloud">azure &mdash; needs sign-off</span>
           </div>
           <ul class="tasks">
             <li><input type="checkbox" id="d12-1"><label for="d12-1"><span class="tag">guard</span>set an Azure budget alert before touching <code class="inline">terraform apply</code></label></li>
@@ -652,7 +653,7 @@
       <span class="num">SHEET 03</span>
       <h2>HCP Terraform &amp; exam readiness</h2>
     </div>
-    <p class="week-sub">Your HCP Terraform org is already connected to GitHub — this sheet puts it to work, then closes with a timed mock exam.</p>
+    <p class="week-sub">Your HCP Terraform org is already connected to GitHub &mdash; this sheet puts it to work, then closes with a timed mock exam.</p>
 
     <div class="days">
 
@@ -731,7 +732,7 @@
           <ul class="tasks">
             <li><input type="checkbox" id="d17-1"><label for="d17-1"><span class="tag">review</span>redo any lab that felt shaky</label></li>
             <li><input type="checkbox" id="d17-2"><label for="d17-2"><span class="tag">exam</span>official HashiCorp sample questions, 60-minute timed mock</label></li>
-            <li><input type="checkbox" id="d17-3"><label for="d17-3"><span class="tag">ship</span>final commit — tag the repo <code class="inline">v1-exam-ready</code></label></li>
+            <li><input type="checkbox" id="d17-3"><label for="d17-3"><span class="tag">ship</span>final commit &mdash; tag the repo <code class="inline">v1-exam-ready</code></label></li>
           </ul>
         </div>
       </div>
@@ -775,7 +776,7 @@
     var done = checkboxes.filter(function (cb) { return cb.checked; }).length;
     var pct = total ? Math.round((done / total) * 100) : 0;
 
-    document.getElementById('progress-count').textContent = done + ' / ' + total + ' tasks — ' + pct + '%';
+    document.getElementById('progress-count').textContent = done + ' / ' + total + ' tasks &mdash; ' + pct + '%';
     var fill = document.getElementById('ruler-fill');
     fill.style.width = pct + '%';
     document.getElementById('ruler').setAttribute('aria-valuenow', pct);
