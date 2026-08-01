@@ -23,3 +23,14 @@ variable "greeting_tags" {
     owner   = "george"
   }
 }
+variable "animal_img_link" {
+  description = "S3 bucket img links"
+  type = list(object({
+    filename = string
+    content  = string
+  }))
+  default = [
+    { filename = "unicorn_img", content = "some_url_1" },
+    { filename = "pegasus_img", content = "some_url_2" },
+  ]
+}

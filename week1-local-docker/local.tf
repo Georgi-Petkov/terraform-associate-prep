@@ -19,3 +19,9 @@ EOT
 
   depends_on = [docker_container.web]
 }
+resource "local_file" "animal_img_link" {
+  for_each = { for item in var.animal_img_link : item.filename => item }
+
+  filename = "${path.module}/output/${each.value.filename}.txt"
+  content  = each.value.content
+}
