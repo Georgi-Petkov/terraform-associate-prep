@@ -11,4 +11,16 @@ resource "docker_container" "web" {
     internal = 80
     external = var.container_port
   }
+
+  lifecycle {
+    precondition {
+      condition     = var.container_port != 80
+      error_message = "container_port must not be 80 — that's the container's internal port."
+    }
+
+    postcondition {
+      condition     = self.name == "${var.container_name}-${random_pet.lab.id}"
+      error_message = "Container name did not match the expected pattern after creation."
+    }
+  }
 }

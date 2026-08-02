@@ -6,7 +6,10 @@ resource "local_file" "greeting" {
   filename = "${path.module}/output/greeting.txt"
   content  = <<-EOT
     Hello from Terraform, pet name: ${random_pet.lab.id}
-    Tags: ${jsonencode(var.greeting_tags)}
+    Container label: ${local.container_label}
+    Port class: ${local.port_class}
+    Owner: ${local.safe_owner}
+    Tags: ${local.tag_summary}
   EOT
 }
 resource "local_file" "collaborate" {
