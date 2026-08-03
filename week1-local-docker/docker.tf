@@ -13,6 +13,8 @@ resource "docker_container" "web" {
   }
 
   lifecycle {
+    create_before_destroy = true
+    ignore_changes        = [image]
     precondition {
       condition     = var.container_port != 80
       error_message = "container_port must not be 80 — that's the container's internal port."

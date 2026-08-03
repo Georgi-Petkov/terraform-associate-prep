@@ -10,6 +10,7 @@ resource "local_file" "greeting" {
     Port class: ${local.port_class}
     Owner: ${local.safe_owner}
     Tags: ${local.tag_summary}
+    Registry token (should be hidden in plan): ${var.registry_auth_token}
   EOT
 }
 resource "local_file" "collaborate" {

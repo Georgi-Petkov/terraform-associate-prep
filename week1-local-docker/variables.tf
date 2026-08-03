@@ -34,3 +34,9 @@ variable "animal_img_link" {
     { filename = "pegasus_img", content = "some_url_2" },
   ]
 }
+variable "registry_auth_token" {
+  description = "Dummy auth token, standing in for a real registry credential"
+  type        = string
+  default     = "not-a-real-secret-abc123"
+  sensitive   = true
+}
