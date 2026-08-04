@@ -7,5 +7,5 @@ output "greeting_file_path" {
 }
 
 output "container_url" {
-  value = "http://localhost:${var.container_port}"
+  value = "http://localhost:${var.container_port} (container: ${docker_container.web.name})"
 }

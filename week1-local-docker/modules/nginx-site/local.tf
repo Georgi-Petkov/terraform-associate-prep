@@ -3,7 +3,7 @@ resource "random_pet" "lab" {
 }
 
 resource "local_file" "greeting" {
-  filename = "${path.module}/output/greeting.txt"
+  filename = "${path.module}/output/${var.container_name}/greeting.txt"
   content  = <<-EOT
     Hello from Terraform, pet name: ${random_pet.lab.id}
     Container label: ${local.container_label}
@@ -14,7 +14,7 @@ resource "local_file" "greeting" {
   EOT
 }
 resource "local_file" "collaborate" {
-  filename = "${path.module}/output/collaborate.txt"
+  filename = "${path.module}/output/${var.container_name}/collaborate.txt"
   content  = <<-EOT
   Terraform allows you to collaborate on your infrastructure with its remote state backends. When you use HCP Terraform (free for up to five users), you can securely share your state with your teammates, provide a stable environment for Terraform to run in, and prevent race conditions when multiple people make configuration changes at once.
 
@@ -26,6 +26,6 @@ EOT
 resource "local_file" "animal_img_link" {
   for_each = { for item in var.animal_img_link : item.filename => item }
 
-  filename = "${path.module}/output/${each.value.filename}.txt"
+  filename = "${path.module}/output/${var.container_name}/${each.value.filename}.txt"
   content  = each.value.content
 }

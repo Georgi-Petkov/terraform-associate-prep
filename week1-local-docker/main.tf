@@ -18,3 +18,16 @@ terraform {
 }
 
 provider "docker" {}
+module "site_blue" {
+  source = "./modules/nginx-site"
+
+  container_name = "tf-prep-nginx-blue"
+  container_port = 8080
+}
+
+module "site_green" {
+  source = "./modules/nginx-site"
+
+  container_name = "tf-prep-nginx-green"
+  container_port = 8081
+}
