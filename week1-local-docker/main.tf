@@ -31,3 +31,10 @@ module "site_green" {
   container_name = "tf-prep-nginx-green"
   container_port = 8081
 }
+module "label" {
+  source  = "cloudposse/label/null"
+  version = "~> 0.25"
+
+  namespace = "tfprep"
+  name      = "nginx"
+}

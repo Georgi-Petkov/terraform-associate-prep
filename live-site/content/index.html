@@ -390,7 +390,7 @@
     <div class="titleblock-main">
       <span class="eyebrow">Study set / hands-on lab plan</span>
       <h1>HashiCorp Certified: Terraform Associate (004)</h1>
-      <p>Seventeen working days across three sheets. Local &amp; Docker first, real Azure resources introduced once the core workflow is automatic, HCP Terraform last. Every day ships a real commit.</p>
+      <p>Twenty working days across three sheets. Local &amp; Docker first, real Azure resources introduced once the core workflow is automatic, HCP Terraform last. Every day ships a real commit.</p>
     </div>
     <div class="titleblock-fields">
       <div class="field">
@@ -403,7 +403,7 @@
       </div>
       <div class="field">
         <span class="eyebrow">Pace</span>
-        <span class="val">17 days / 3 sheets</span>
+        <span class="val">20 days / 3 sheets</span>
       </div>
       <div class="field">
         <span class="eyebrow">Repo</span>
@@ -455,7 +455,7 @@
           <div class="day-top">
             <span class="day-num">DAY 02</span>
             <h3>Providers, versioning &amp; the dependency graph</h3>
-            <span class="chip">obj 2b&ndash;2d, 4a&ndash;4b, 4f</span>
+            <span class="chip">obj 2b&ndash;2d, 3d, 4f</span>
           </div>
           <ul class="tasks">
             <li><input type="checkbox" id="d2-1"><label for="d2-1"><span class="tag">read</span>providers overview, provider requirements, dependency lock file</label></li>
@@ -542,7 +542,7 @@
       <span class="num">SHEET 02</span>
       <h2>Modules, state operations &amp; Azure</h2>
     </div>
-    <p class="week-sub">Same mechanics, reused. Azure appears exactly once, on Day 12, scoped to resource-group + storage-account, with a budget alert set before the first apply.</p>
+    <p class="week-sub">Same mechanics, reused. Azure appears exactly once, on Day 14, scoped to resource-group + storage-account, with a budget alert set before the first apply.</p>
 
     <div class="days">
 
@@ -583,14 +583,13 @@
         <div class="day-card">
           <div class="day-top">
             <span class="day-num">DAY 09</span>
-            <h3>State surgery: move, import, remove</h3>
-            <span class="chip">obj 6f&ndash;6h, 7a</span>
+            <h3>Data sources: resource vs. data blocks</h3>
+            <span class="chip">obj 4a</span>
           </div>
           <ul class="tasks">
-            <li><input type="checkbox" id="d9-1"><label for="d9-1"><span class="tag">read</span><code class="inline">moved</code> block, refactoring state, importing existing resources</label></li>
-            <li><input type="checkbox" id="d9-2"><label for="d9-2"><span class="tag">lab</span>rename a resource in config, reconcile with a <code class="inline">moved</code> block instead of destroy/recreate</label></li>
-            <li><input type="checkbox" id="d9-3"><label for="d9-3"><span class="tag">lab</span><code class="inline">docker run</code> a container by hand, then <code class="inline">terraform import</code> it</label></li>
-            <li><input type="checkbox" id="d9-4"><label for="d9-4"><span class="tag">ship</span>commit &amp; push</label></li>
+            <li><input type="checkbox" id="d9-1"><label for="d9-1"><span class="tag">read</span>data sources overview &mdash; how <code class="inline">data</code> differs from <code class="inline">resource</code> (read-only lookup vs. managed lifecycle)</label></li>
+            <li><input type="checkbox" id="d9-2"><label for="d9-2"><span class="tag">lab</span>add a <code class="inline">data "docker_image"</code> (or <code class="inline">data "local_file"</code> against a Day 1 output) block, reference its output as a resource argument</label></li>
+            <li><input type="checkbox" id="d9-3"><label for="d9-3"><span class="tag">ship</span>commit &amp; push</label></li>
           </ul>
         </div>
       </div>
@@ -600,13 +599,15 @@
         <div class="day-card">
           <div class="day-top">
             <span class="day-num">DAY 10</span>
-            <h3>Inspecting &amp; troubleshooting</h3>
-            <span class="chip">obj 7b, 7c</span>
+            <h3>State surgery: move, remove, import</h3>
+            <span class="chip">obj 6d, 6f&ndash;6h, 7a</span>
           </div>
           <ul class="tasks">
-            <li><input type="checkbox" id="d10-1"><label for="d10-1"><span class="tag">read</span><code class="inline">terraform state list/show</code>, enabling logs, troubleshooting</label></li>
-            <li><input type="checkbox" id="d10-2"><label for="d10-2"><span class="tag">lab</span>run one <code class="inline">apply</code> with <code class="inline">TF_LOG=DEBUG</code>, find the provider's raw API call in the log</label></li>
-            <li><input type="checkbox" id="d10-3"><label for="d10-3"><span class="tag">ship</span>commit &amp; push</label></li>
+            <li><input type="checkbox" id="d10-1"><label for="d10-1"><span class="tag">read</span><code class="inline">moved</code> and <code class="inline">removed</code> blocks, refactoring state, importing existing resources</label></li>
+            <li><input type="checkbox" id="d10-2"><label for="d10-2"><span class="tag">lab</span>rename a resource in config, reconcile with a <code class="inline">moved</code> block instead of destroy/recreate</label></li>
+            <li><input type="checkbox" id="d10-3"><label for="d10-3"><span class="tag">lab</span>delete a resource from config, use a <code class="inline">removed</code> block to drop it from state without destroying the real infrastructure</label></li>
+            <li><input type="checkbox" id="d10-4"><label for="d10-4"><span class="tag">lab</span><code class="inline">docker run</code> a container by hand, then <code class="inline">terraform import</code> it</label></li>
+            <li><input type="checkbox" id="d10-5"><label for="d10-5"><span class="tag">ship</span>commit &amp; push</label></li>
           </ul>
         </div>
       </div>
@@ -616,13 +617,15 @@
         <div class="day-card">
           <div class="day-top">
             <span class="day-num">DAY 11</span>
-            <h3>Remote backend basics</h3>
-            <span class="chip">obj 6c</span>
+            <h3>Inspecting &amp; troubleshooting</h3>
+            <span class="chip">obj 7b, 7c</span>
           </div>
           <ul class="tasks">
-            <li><input type="checkbox" id="d11-1"><label for="d11-1"><span class="tag">read</span><code class="inline">backend</code> block configuration, state storage &amp; locking</label></li>
-            <li><input type="checkbox" id="d11-2"><label for="d11-2"><span class="tag">lab</span>change the backend config path, observe the re-init prompt and state migration</label></li>
-            <li><input type="checkbox" id="d11-3"><label for="d11-3"><span class="tag">ship</span>commit &amp; push</label></li>
+            <li><input type="checkbox" id="d11-1"><label for="d11-1"><span class="tag">read</span><code class="inline">terraform state list/show/pull/push/replace-provider</code>, enabling logs, troubleshooting</label></li>
+            <li><input type="checkbox" id="d11-2"><label for="d11-2"><span class="tag">lab</span>run one <code class="inline">apply</code> with <code class="inline">TF_LOG=DEBUG</code>, find the provider's raw API call in the log</label></li>
+            <li><input type="checkbox" id="d11-3"><label for="d11-3"><span class="tag">lab</span><code class="inline">terraform state pull</code> to a file, inspect the raw JSON, then <code class="inline">state push</code> the same unaltered file back</label></li>
+            <li><input type="checkbox" id="d11-4"><label for="d11-4"><span class="tag">lab</span><code class="inline">terraform state replace-provider</code> &mdash; walk through the prompts against a mirrored source address, cancel before confirming</label></li>
+            <li><input type="checkbox" id="d11-5"><label for="d11-5"><span class="tag">ship</span>commit &amp; push</label></li>
           </ul>
         </div>
       </div>
@@ -632,14 +635,47 @@
         <div class="day-card">
           <div class="day-top">
             <span class="day-num">DAY 12</span>
+            <h3>Remote backend basics</h3>
+            <span class="chip">obj 6c</span>
+          </div>
+          <ul class="tasks">
+            <li><input type="checkbox" id="d12-1"><label for="d12-1"><span class="tag">read</span><code class="inline">backend</code> block configuration, state storage &amp; locking</label></li>
+            <li><input type="checkbox" id="d12-2"><label for="d12-2"><span class="tag">lab</span>change the backend config path, observe the re-init prompt and state migration</label></li>
+            <li><input type="checkbox" id="d12-3"><label for="d12-3"><span class="tag">ship</span>commit &amp; push</label></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day" data-day="13">
+        <div class="node-col"><div class="node-dot"></div></div>
+        <div class="day-card">
+          <div class="day-top">
+            <span class="day-num">DAY 13</span>
+            <h3>Vault-backed secrets</h3>
+            <span class="chip">obj 4h</span>
+          </div>
+          <ul class="tasks">
+            <li><input type="checkbox" id="d13-1"><label for="d13-1"><span class="tag">read</span><code class="inline">hashicorp/vault</code> provider, KV v2 secrets engine basics</label></li>
+            <li><input type="checkbox" id="d13-2"><label for="d13-2"><span class="tag">lab</span>run a local Vault dev server (<code class="inline">docker run hashicorp/vault server -dev</code>), write a secret with the CLI</label></li>
+            <li><input type="checkbox" id="d13-3"><label for="d13-3"><span class="tag">lab</span>read that secret via <code class="inline">data "vault_kv_secret_v2"</code>, feed it into a resource, confirm it's redacted in <code class="inline">plan</code> output</label></li>
+            <li><input type="checkbox" id="d13-4"><label for="d13-4"><span class="tag">ship</span>commit &amp; push &mdash; double-check no raw secret values are in the diff</label></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day" data-day="14">
+        <div class="node-col"><div class="node-dot"></div></div>
+        <div class="day-card">
+          <div class="day-top">
+            <span class="day-num">DAY 14</span>
             <h3>Provision Azure resources</h3>
             <span class="chip cloud">azure &mdash; needs sign-off</span>
           </div>
           <ul class="tasks">
-            <li><input type="checkbox" id="d12-1"><label for="d12-1"><span class="tag">guard</span>set an Azure budget alert before touching <code class="inline">terraform apply</code></label></li>
-            <li><input type="checkbox" id="d12-2"><label for="d12-2"><span class="tag">lab</span><code class="inline">azurerm_resource_group</code> + <code class="inline">azurerm_storage_account</code> only, tagged <code class="inline">learning=true</code></label></li>
-            <li><input type="checkbox" id="d12-3"><label for="d12-3"><span class="tag">lab</span><code class="inline">apply</code>, confirm in the Azure portal, then <code class="inline">destroy</code> before ending the session</label></li>
-            <li><input type="checkbox" id="d12-4"><label for="d12-4"><span class="tag">ship</span>commit &amp; push</label></li>
+            <li><input type="checkbox" id="d14-1"><label for="d14-1"><span class="tag">guard</span>set an Azure budget alert before touching <code class="inline">terraform apply</code></label></li>
+            <li><input type="checkbox" id="d14-2"><label for="d14-2"><span class="tag">lab</span><code class="inline">azurerm_resource_group</code> + <code class="inline">azurerm_storage_account</code> only, tagged <code class="inline">learning=true</code></label></li>
+            <li><input type="checkbox" id="d14-3"><label for="d14-3"><span class="tag">lab</span><code class="inline">apply</code>, confirm in the Azure portal, then <code class="inline">destroy</code> before ending the session</label></li>
+            <li><input type="checkbox" id="d14-4"><label for="d14-4"><span class="tag">ship</span>commit &amp; push</label></li>
           </ul>
         </div>
       </div>
@@ -657,49 +693,17 @@
 
     <div class="days">
 
-      <div class="day" data-day="13">
-        <div class="node-col"><div class="node-dot"></div></div>
-        <div class="day-card">
-          <div class="day-top">
-            <span class="day-num">DAY 13</span>
-            <h3>HCP Terraform fundamentals</h3>
-            <span class="chip">obj 8a, 8b</span>
-          </div>
-          <ul class="tasks">
-            <li><input type="checkbox" id="d13-1"><label for="d13-1"><span class="tag">read</span>what is HCP Terraform, remote operations</label></li>
-            <li><input type="checkbox" id="d13-2"><label for="d13-2"><span class="tag">lab</span><code class="inline">terraform login</code>, migrate the week-1 lab's state into an HCP Terraform workspace</label></li>
-            <li><input type="checkbox" id="d13-3"><label for="d13-3"><span class="tag">ship</span>commit &amp; push</label></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="day" data-day="14">
-        <div class="node-col"><div class="node-dot"></div></div>
-        <div class="day-card">
-          <div class="day-top">
-            <span class="day-num">DAY 14</span>
-            <h3>Workspaces, projects &amp; VCS-driven runs</h3>
-            <span class="chip">obj 8c</span>
-          </div>
-          <ul class="tasks">
-            <li><input type="checkbox" id="d14-1"><label for="d14-1"><span class="tag">read</span>HCP Terraform workspaces, organizing workspaces with projects</label></li>
-            <li><input type="checkbox" id="d14-2"><label for="d14-2"><span class="tag">lab</span>push to the connected GitHub repo, watch HCP Terraform auto-trigger a plan</label></li>
-            <li><input type="checkbox" id="d14-3"><label for="d14-3"><span class="tag">ship</span>this push is the commit</label></li>
-          </ul>
-        </div>
-      </div>
-
       <div class="day" data-day="15">
         <div class="node-col"><div class="node-dot"></div></div>
         <div class="day-card">
           <div class="day-top">
             <span class="day-num">DAY 15</span>
-            <h3>Variable sets, teams &amp; governance tour</h3>
-            <span class="chip">obj 8b, 8d</span>
+            <h3>HCP Terraform fundamentals</h3>
+            <span class="chip">obj 8a, 8b</span>
           </div>
           <ul class="tasks">
-            <li><input type="checkbox" id="d15-1"><label for="d15-1"><span class="tag">read</span>variable sets, teams overview, permissions overview</label></li>
-            <li><input type="checkbox" id="d15-2"><label for="d15-2"><span class="tag">lab</span>create one variable set and apply it to your workspace</label></li>
+            <li><input type="checkbox" id="d15-1"><label for="d15-1"><span class="tag">read</span>what is HCP Terraform, remote operations</label></li>
+            <li><input type="checkbox" id="d15-2"><label for="d15-2"><span class="tag">lab</span><code class="inline">terraform login</code>, migrate the week-1 lab's state into an HCP Terraform workspace</label></li>
             <li><input type="checkbox" id="d15-3"><label for="d15-3"><span class="tag">ship</span>commit &amp; push</label></li>
           </ul>
         </div>
@@ -710,13 +714,13 @@
         <div class="day-card">
           <div class="day-top">
             <span class="day-num">DAY 16</span>
-            <h3>Dynamic credentials, drift &amp; policy overview</h3>
-            <span class="chip">obj 8d</span>
+            <h3>Workspaces, projects &amp; VCS-driven runs</h3>
+            <span class="chip">obj 8c</span>
           </div>
           <ul class="tasks">
-            <li><input type="checkbox" id="d16-1"><label for="d16-1"><span class="tag">read</span>dynamic provider credentials, detecting drift &amp; enforcing policies</label></li>
-            <li><input type="checkbox" id="d16-2"><label for="d16-2"><span class="tag">lab</span>enable health assessments on the workspace, trigger a manual drift check</label></li>
-            <li><input type="checkbox" id="d16-3"><label for="d16-3"><span class="tag">ship</span>commit &amp; push</label></li>
+            <li><input type="checkbox" id="d16-1"><label for="d16-1"><span class="tag">read</span>HCP Terraform workspaces, organizing workspaces with projects</label></li>
+            <li><input type="checkbox" id="d16-2"><label for="d16-2"><span class="tag">lab</span>push to the connected GitHub repo, watch HCP Terraform auto-trigger a plan</label></li>
+            <li><input type="checkbox" id="d16-3"><label for="d16-3"><span class="tag">ship</span>this push is the commit</label></li>
           </ul>
         </div>
       </div>
@@ -726,13 +730,62 @@
         <div class="day-card">
           <div class="day-top">
             <span class="day-num">DAY 17</span>
+            <h3>Variable sets, teams &amp; governance tour</h3>
+            <span class="chip">obj 8b, 8d</span>
+          </div>
+          <ul class="tasks">
+            <li><input type="checkbox" id="d17-1"><label for="d17-1"><span class="tag">read</span>variable sets, teams overview, permissions overview</label></li>
+            <li><input type="checkbox" id="d17-2"><label for="d17-2"><span class="tag">lab</span>create one variable set and apply it to your workspace</label></li>
+            <li><input type="checkbox" id="d17-3"><label for="d17-3"><span class="tag">read</span>HCP Terraform Explorer &amp; Change Requests overview</label></li>
+            <li><input type="checkbox" id="d17-4"><label for="d17-4"><span class="tag">lab</span>open the Explorer view, filter workspaces by an attribute (e.g. Terraform version)</label></li>
+            <li><input type="checkbox" id="d17-5"><label for="d17-5"><span class="tag">ship</span>commit &amp; push</label></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day" data-day="18">
+        <div class="node-col"><div class="node-dot"></div></div>
+        <div class="day-card">
+          <div class="day-top">
+            <span class="day-num">DAY 18</span>
+            <h3>Dynamic credentials, drift &amp; policy overview</h3>
+            <span class="chip">obj 8d</span>
+          </div>
+          <ul class="tasks">
+            <li><input type="checkbox" id="d18-1"><label for="d18-1"><span class="tag">read</span>dynamic provider credentials, detecting drift &amp; enforcing policies</label></li>
+            <li><input type="checkbox" id="d18-2"><label for="d18-2"><span class="tag">lab</span>enable health assessments on the workspace, trigger a manual drift check</label></li>
+            <li><input type="checkbox" id="d18-3"><label for="d18-3"><span class="tag">ship</span>commit &amp; push</label></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day" data-day="19">
+        <div class="node-col"><div class="node-dot"></div></div>
+        <div class="day-card">
+          <div class="day-top">
+            <span class="day-num">DAY 19</span>
+            <h3>Buffer / catch-up</h3>
+            <span class="chip">flex</span>
+          </div>
+          <ul class="tasks">
+            <li><input type="checkbox" id="d19-1"><label for="d19-1"><span class="tag">review</span>no new material &mdash; redo whichever lab from Days 1&ndash;18 felt shakiest</label></li>
+            <li><input type="checkbox" id="d19-2"><label for="d19-2"><span class="tag">guard</span>confirm every cloud resource from Day 14 was actually destroyed</label></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day" data-day="20">
+        <div class="node-col"><div class="node-dot"></div></div>
+        <div class="day-card">
+          <div class="day-top">
+            <span class="day-num">DAY 20</span>
             <h3>Full review &amp; timed mock exam</h3>
             <span class="chip">all objectives</span>
           </div>
           <ul class="tasks">
-            <li><input type="checkbox" id="d17-1"><label for="d17-1"><span class="tag">review</span>redo any lab that felt shaky</label></li>
-            <li><input type="checkbox" id="d17-2"><label for="d17-2"><span class="tag">exam</span>official HashiCorp sample questions, 60-minute timed mock</label></li>
-            <li><input type="checkbox" id="d17-3"><label for="d17-3"><span class="tag">ship</span>final commit &mdash; tag the repo <code class="inline">v1-exam-ready</code></label></li>
+            <li><input type="checkbox" id="d20-1"><label for="d20-1"><span class="tag">review</span>redo any lab that felt shaky</label></li>
+            <li><input type="checkbox" id="d20-2"><label for="d20-2"><span class="tag">exam</span>official HashiCorp sample questions, 60-minute timed mock</label></li>
+            <li><input type="checkbox" id="d20-3"><label for="d20-3"><span class="tag">ship</span>final commit &mdash; tag the repo <code class="inline">v1-exam-ready</code></label></li>
           </ul>
         </div>
       </div>
@@ -749,7 +802,39 @@
 <script>
 (function () {
   var checkboxes = Array.prototype.slice.call(document.querySelectorAll('.tasks input[type="checkbox"]'));
-  var STORAGE_KEY = 'tf004-plan-v1';
+  var OLD_STORAGE_KEY = 'tf004-plan-v1';
+  var STORAGE_KEY = 'tf004-plan-v2';
+
+  // One-time migration for the Day 8 plan restructure (days 9-17 renumbered/expanded to 9-20).
+  // Only maps ids whose task content is unchanged; new or expanded tasks are left unmapped
+  // so they come up unchecked and prompt a redo.
+  var MIGRATION_MAP = {
+    'd9-2': 'd10-2', 'd9-3': 'd10-4', 'd9-4': 'd10-5',
+    'd10-2': 'd11-2', 'd10-3': 'd11-5',
+    'd11-1': 'd12-1', 'd11-2': 'd12-2', 'd11-3': 'd12-3',
+    'd12-1': 'd14-1', 'd12-2': 'd14-2', 'd12-3': 'd14-3', 'd12-4': 'd14-4',
+    'd13-1': 'd15-1', 'd13-2': 'd15-2', 'd13-3': 'd15-3',
+    'd14-1': 'd16-1', 'd14-2': 'd16-2', 'd14-3': 'd16-3',
+    'd15-1': 'd17-1', 'd15-2': 'd17-2', 'd15-3': 'd17-5',
+    'd16-1': 'd18-1', 'd16-2': 'd18-2', 'd16-3': 'd18-3',
+    'd17-1': 'd20-1', 'd17-2': 'd20-2', 'd17-3': 'd20-3'
+  };
+
+  function migrate() {
+    if (localStorage.getItem(STORAGE_KEY)) return;
+    var raw;
+    try { raw = JSON.parse(localStorage.getItem(OLD_STORAGE_KEY)) || {}; }
+    catch (e) { raw = {}; }
+    var migrated = {};
+    Object.keys(raw).forEach(function (oldId) {
+      if (!raw[oldId]) return;
+      if (/^d[1-8]-\d+$/.test(oldId)) { migrated[oldId] = true; return; }
+      if (MIGRATION_MAP[oldId]) { migrated[MIGRATION_MAP[oldId]] = true; }
+    });
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(migrated)); }
+    catch (e) {}
+  }
+  migrate();
 
   function load() {
     try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
