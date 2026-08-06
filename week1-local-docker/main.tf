@@ -38,3 +38,9 @@ module "label" {
   namespace = "tfprep"
   name      = "nginx"
 }
+data "docker_network" "bridge" {
+  name = "bridge"
+}
+output "bridge_network_id" {
+  value = data.docker_network.bridge.id
+}
