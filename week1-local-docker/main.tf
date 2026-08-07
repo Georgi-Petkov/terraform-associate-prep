@@ -18,7 +18,7 @@ terraform {
 }
 
 provider "docker" {}
-module "site_blue" {
+module "site_prod_blue" {
   source = "./modules/nginx-site"
 
   container_name = "tf-prep-nginx-blue"
@@ -43,4 +43,17 @@ data "docker_network" "bridge" {
 }
 output "bridge_network_id" {
   value = data.docker_network.bridge.id
+}
+resource "local_file" "scratch" {
+  filename = "${path.module}/scratch.txt"
+  content  = "practice removed block"
+}
+resource "docker_container" "manual" {
+  name  = "manual-nginx"
+  image = "nginx:alpine"
+}
+
+moved {
+  from = module.site_blue
+  to   = module.site_prod_blue
 }
