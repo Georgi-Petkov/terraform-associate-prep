@@ -14,10 +14,15 @@ terraform {
       source  = "kreuzwerker/docker"
       version = "~> 3.0"
     }
+    vault = {
+  source  = "hashicorp/vault"
+  version = "~> 4.0"
+}
   }
   backend "local" {
     path = "state/terraform.tfstate"
   }
+  
 }
 
 provider "docker" {}
@@ -55,7 +60,17 @@ resource "docker_container" "manual" {
   name  = "manual-nginx"
   image = "nginx:alpine"
 }
+provider "vault" {}
 
+data "vault_kv_secret_v2" "db" {
+  mount = "secret"
+  name  = "myapp/db"
+}
+
+resource "local_file" "vault_secret_demo" {
+  filename = "${path.module}/vault_secret_demo.txt"
+  content  = data.vault_kv_secret_v2.db.data["password"]
+}
 moved {
   from = module.site_blue
   to   = module.site_prod_blue
