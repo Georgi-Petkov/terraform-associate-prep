@@ -58,7 +58,7 @@ output "bridge_network_id" {
 }
 resource "local_file" "scratch" {
   filename = "${path.module}/scratch.txt"
-  content  = "practice auto trigger a plan after you change to remote execution mode!"
+  content  = "practice always trigger runs!"
 }
 resource "docker_container" "manual" {
   name  = "manual-nginx"
