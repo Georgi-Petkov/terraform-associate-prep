@@ -58,7 +58,7 @@ output "bridge_network_id" {
 }
 resource "local_file" "scratch" {
   filename = "${path.module}/scratch.txt"
-  content  = "practice removed block"
+  content  = "practice auto trigger a plan"
 }
 resource "docker_container" "manual" {
   name  = "manual-nginx"
