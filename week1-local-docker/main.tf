@@ -19,9 +19,13 @@ terraform {
   version = "~> 4.0"
 }
   }
-  backend "local" {
-    path = "state/terraform.tfstate"
+  cloud {
+  organization = "Practice_IAC"
+
+  workspaces {
+    name = "week1-local-docker"
   }
+}
   
 }
 
