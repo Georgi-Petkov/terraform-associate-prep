@@ -58,7 +58,7 @@ output "bridge_network_id" {
 }
 resource "local_file" "scratch" {
   filename = "${path.module}/scratch.txt"
-  content  = "practice always trigger runs!"
+  content  = "practice pattern trigger runs one last time !"
 }
 resource "docker_container" "manual" {
   name  = "manual-nginx"
